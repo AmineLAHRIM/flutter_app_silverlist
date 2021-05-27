@@ -1,6 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class Example1 extends StatelessWidget {
+class Example2 extends StatelessWidget {
   final List<String> list = [
     'amine',
     'amine2',
@@ -12,6 +13,8 @@ class Example1 extends StatelessWidget {
     'amine8',
     'amine9',
   ];
+  
+  final colorbg=Color(0xFF01002E);
 
   @override
   Widget build(BuildContext context) {
@@ -23,49 +26,71 @@ class Example1 extends StatelessWidget {
       height: double.infinity,
       child: Column(
         children: [
-          Container(
-            width: double.infinity,
-            height: 80,
-            color: Colors.lightBlue,
-            alignment: Alignment.center,
-            child: Text(
-              'Fixed Container Here',
-              style: TextStyle(fontSize: 20, color: Colors.white),
-              textAlign: TextAlign.center,
-            ),
-          ),
           Expanded(
               child: Container(
-            color: Colors.white,
+            color: colorbg,
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
                   //to delete back button that appear if you push new page not pushreplaced
                   automaticallyImplyLeading: false,
                   //heignt size
-                  expandedHeight: 150,
+                  expandedHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom - 100,
                   // if false you want to go to the up then see flexiblespace
                   floating: true,
                   //if true will not hide flexible space
                   pinned: false,
                   // Display a placeholder widget to visualize the shrinking size.
                   flexibleSpace: Container(
-                    alignment: Alignment.center,
                     width: double.infinity,
                     height: double.infinity,
                     color: Colors.deepOrangeAccent,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Amine CustomScrollView > SilverAppBar + SliverList',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: CachedNetworkImage(
+                            imageUrl: 'https://i.imgur.com/StNtgvB.jpg',
+                            placeholder: (context, url) => Container(
+                              color: Colors.black,
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            alignment: Alignment.bottomCenter,
+                            child: Container(
+                              height: 300,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
+                                  colorbg,
+                                  colorbg.withOpacity(0.8),
+                                  colorbg.withOpacity(0),
+                                ]),
+                              ),
+                            )),
+                        Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          alignment: Alignment(0.0, 0.7),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(
+                              'FireWatch Play Now',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 30, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   // Make the initial height of the SliverAppBar larger than normal.
                 ),
-                SliverPersistentHeader(
+                /* SliverPersistentHeader(
                   delegate: _SliverPersistentHeaderDelegate(
                       child: PreferredSize(
                     preferredSize: Size.fromHeight(200.0),
@@ -82,7 +107,7 @@ class Example1 extends StatelessWidget {
                       ),
                     ),
                   )),
-                ),
+                ),*/
                 SliverList(
                   // Use a delegate to build items as they're scrolled on screen.
                   delegate: SliverChildBuilderDelegate(
@@ -121,8 +146,7 @@ class _SliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   _SliverPersistentHeaderDelegate({required this.child});
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     // TODO: implement build
     return child;
   }

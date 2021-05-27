@@ -23,7 +23,16 @@ class HomePage extends StatelessWidget {
                       Navigator.pushNamed(context, 'Example1');
                     },
                     child: Text(
-                      'CustomScrollView > SliverAppBar + SliverPersistentHeader + SliverList',
+                      'Example1',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'Example2');
+                    },
+                    child: Text(
+                      'Example2',
                       textAlign: TextAlign.center,
                     ),
                   )

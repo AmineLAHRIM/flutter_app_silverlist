@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_silverlist/example1.page.dart';
+import 'package:flutter_app_silverlist/example2.page.dart';
 import 'package:flutter_app_silverlist/home.page.dart';
 
 void main() {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
       routes: {
         'Example1': (ctx) => Example1(),
+        'Example2': (ctx) => Example2(),
       },
     );
   }
