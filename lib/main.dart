@@ -79,10 +79,32 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.deepOrangeAccent,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text('Amine CustomScrollView > SilverAppBar + SliverList',style: TextStyle(fontSize: 20,color: Colors.white),textAlign: TextAlign.center,),
+                      child: Text(
+                        'Amine CustomScrollView > SilverAppBar + SliverList',
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                   // Make the initial height of the SliverAppBar larger than normal.
+                ),
+                SliverPersistentHeader(
+                  delegate: _SliverPersistentHeaderDelegate(
+                      child: PreferredSize(
+                    preferredSize: Size.fromHeight(200.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.lightGreen,
+                      child: Center(
+                        child: Text(
+                          'SliverPersistentHeader delegate => _SliverPersistentHeaderDelegate(class) child => PreferredSize ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  )),
                 ),
                 SliverList(
                   // Use a delegate to build items as they're scrolled on screen.
@@ -113,5 +135,32 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     )));
+  }
+}
+
+class _SliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final PreferredSize child;
+
+  _SliverPersistentHeaderDelegate({this.child});
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    // TODO: implement build
+    return child;
+  }
+
+  @override
+  // TODO: implement maxExtent
+  double get maxExtent => child.preferredSize.height;
+
+  @override
+  // TODO: implement minExtent
+  double get minExtent => child.preferredSize.height;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    // TODO: implement shouldRebuild
+    return false;
   }
 }
